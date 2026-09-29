@@ -1,0 +1,6 @@
+nltk>=3.8
+spacy>=3.7
+streamlit>=1.30
+pyyaml>=6.0
+python-dotenv>=1.0
+google-generativeai>=0.5

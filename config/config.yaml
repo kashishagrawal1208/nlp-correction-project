@@ -1,0 +1,15 @@
+# Project configuration
+
+llm:
+  provider: gemini
+  model: gemini-2.0-flash
+  temperature: 0.2
+  prompt_file: prompts/correction_prompt.txt
+
+nlp:
+  spacy_model: en_core_web_sm
+  ngram_corpus: brown
+  max_edit_distance: 2
+
+paths:
+  test_data: data/test_sentences.csv
