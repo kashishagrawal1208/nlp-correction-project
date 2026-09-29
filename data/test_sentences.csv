@@ -1,0 +1,26 @@
+id,category,input,expected,misspelled
+1,correct,"The boy eats red apples.","The boy eats red apples.",
+2,correct,"We visited the museum on Sunday.","We visited the museum on Sunday.",
+3,correct,"My sister works at a hospital.","My sister works at a hospital.",
+4,correct,"They are playing football in the park.","They are playing football in the park.",
+5,spelling,"I recieved teh letter yesterday.","I received the letter yesterday.",recieved>received;teh>the
+6,spelling,"The weather is beutiful today.","The weather is beautiful today.",beutiful>beautiful
+7,spelling,"She definately wants to join us.","She definitely wants to join us.",definately>definitely
+8,spelling,"He is a very inteligent student.","He is a very intelligent student.",inteligent>intelligent
+9,spelling,"Please send me the adress of the office.","Please send me the address of the office.",adress>address
+10,agreement,"She go to school every day.","She goes to school every day.",
+11,agreement,"The boys plays cricket after school.","The boys play cricket after school.",
+12,agreement,"My brother don't like coffee.","My brother doesn't like coffee.",
+13,agreement,"The books on the table is mine.","The books on the table are mine.",
+14,tense,"Yesterday I go to the market.","Yesterday I went to the market.",
+15,tense,"Last night they watch a movie together.","Last night they watched a movie together.",
+16,tense,"I have seen him yesterday.","I saw him yesterday.",
+17,article,"She is an teacher at my school.","She is a teacher at my school.",
+18,article,"I need a umbrella today.","I need an umbrella today.",
+19,article,"Sun rises in the east.","The sun rises in the east.",
+20,real_word,"I want to by a knew car.","I want to buy a new car.",
+21,real_word,"Their going to the market tomorrow.","They're going to the market tomorrow.",
+22,real_word,"I don't know weather he will come.","I don't know whether he will come.",
+23,multiple,"I recieved teh letter yesterday. She go to school evry day.","I received the letter yesterday. She goes to school every day.",recieved>received;teh>the;evry>every
+24,multiple,"The childrens is playing in the gardan.","The children are playing in the garden.",childrens>children;gardan>garden
+25,multiple,"He go to the libary every day.","He goes to the library every day.",libary>library

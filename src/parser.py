@@ -71,23 +71,28 @@ def check_agreement(doc):
     Uses the dependency link (subject -> verb) plus Penn Treebank tags:
       VBZ = present, 3rd person singular ("goes")
       VBP = present, other persons ("go")
+    The verb form that shows agreement can be the main verb ("She go")
+    or an auxiliary attached to it ("The boys is playing", "He don't like").
     This is a heuristic: it only catches present-tense mismatches."""
     issues = []
     for token in doc:
-        if token.dep_ != "nsubj" or token.head.tag_ not in ("VBP", "VBZ"):
+        if token.dep_ != "nsubj":
             continue
-        verb = token.head
         subject = token.text.lower()
-
         is_singular = token.tag_ in ("NN", "NNP") or subject in SINGULAR_PRONOUNS
         is_plural = token.tag_ in ("NNS", "NNPS") or subject in PLURAL_PRONOUNS
 
-        if is_singular and verb.tag_ == "VBP":
-            issues.append(f"Possible agreement error: singular subject "
-                          f"'{token.text}' with verb '{verb.text}' (VBP)")
-        elif is_plural and verb.tag_ == "VBZ":
-            issues.append(f"Possible agreement error: plural subject "
-                          f"'{token.text}' with verb '{verb.text}' (VBZ)")
+        # The subject's head verb, plus any auxiliaries attached to that verb
+        verbs = [token.head] + [c for c in token.head.children if c.dep_ == "aux"]
+        for verb in verbs:
+            if verb.tag_ not in ("VBP", "VBZ"):
+                continue
+            if is_singular and verb.tag_ == "VBP":
+                issues.append(f"Possible agreement error: singular subject "
+                              f"'{token.text}' with verb '{verb.text}' (VBP)")
+            elif is_plural and verb.tag_ == "VBZ":
+                issues.append(f"Possible agreement error: plural subject "
+                              f"'{token.text}' with verb '{verb.text}' (VBZ)")
 
     if not any(t.pos_ in ("VERB", "AUX") for t in doc):
         issues.append("No verb found: the sentence may be a fragment")
