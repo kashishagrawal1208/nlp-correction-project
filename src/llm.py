@@ -8,6 +8,7 @@ If the API fails (no key, network, quota, bad JSON), a rule-based FALLBACK
 correction built from the spelling module is returned instead.
 """
 
+import hashlib
 import json
 import os
 import re
@@ -120,6 +121,38 @@ def fallback_correction(pipeline_result):
             })
     return text, changes
 
+# ---------- Cache: never pay twice for the same prompt ----------
+
+CACHE_PATH = "data/llm_cache.json"
+
+
+def cache_key(prompt, config):
+    """A fingerprint of everything that affects the answer."""
+    raw = f"{config['model']}|{config.get('temperature', 0.2)}|{prompt}"
+    return hashlib.sha256(raw.encode("utf-8")).hexdigest()
+
+
+def load_cache():
+    """Read the cache file (an empty cache if it is missing or damaged)."""
+    try:
+        with open(CACHE_PATH, "r", encoding="utf-8") as file:
+            return json.load(file)
+    except (OSError, ValueError):
+        return {}
+
+
+def save_to_cache(key, data):
+    """Save one successful LLM answer."""
+    cache = load_cache()
+    cache[key] = data
+    with open(CACHE_PATH, "w", encoding="utf-8") as file:
+        json.dump(cache, file, indent=2, ensure_ascii=False)
+
+def is_daily_quota_error(error):
+    """True if the API says the DAILY free quota is used up.
+    Retrying cannot help until tomorrow, so we stop immediately."""
+    message = str(error)
+    return "RESOURCE_EXHAUSTED" in message and "PerDay" in message
 
 # ---------- Main entry point ----------
 
@@ -136,9 +169,23 @@ def correct_text(pipeline_result):
     retries = config.get("max_retries", 2)
     last_error = None
 
+    key = cache_key(prompt, config)
+    cached = load_cache().get(key)
+    if cached:
+        return {
+            "source": "llm",
+            "corrected_text": cached["corrected_text"],
+            "changes": cached["changes"],
+            "summary": cached["summary"],
+            "error": None,
+            "prompt": prompt,
+            "cached": True,
+        }
+
     for attempt in range(retries + 1):
         try:
             data = parse_llm_json(call_llm(prompt, config))
+            save_to_cache(key, data)
             return {
                 "source": "llm",
                 "corrected_text": data["corrected_text"],
@@ -152,9 +199,11 @@ def correct_text(pipeline_result):
             break
         except Exception as error:         # network, quota, bad JSON ...
             last_error = error
+            if is_daily_quota_error(error):
+                break                      # retrying cannot help until tomorrow
             if attempt < retries:
                 time.sleep(2 ** attempt)   # wait 1s, then 2s, before retrying
-
+    
     text, changes = fallback_correction(pipeline_result)
     return {
         "source": "fallback",
