@@ -178,7 +178,7 @@ For the second sentence the spell checker finds nothing (both words are in the d
 | Agreement rule, first version | 5 of 7 errors found |
 | Agreement rule after checking auxiliary verbs | 7 of 7 found, 0 false alarms. **The rule was changed after seeing these failures on the same test set, so this figure is optimistic** |
 
-**LLM correction evaluation: pending.** *(To be filled in after running `python -m manual_tests.eval_llm`.)*
+**LLM correction** (`gemini-3.1-flash-lite`, temperature 0.2, single run): the corrected text matched the expected sentence exactly for **25 of 25** test sentences, and **0 of 4** already-correct sentences were changed. Caveats: the test set is small and easy, it was written by the author, only one run was made, and we did **not** compare against a run without the NLP evidence, so this does not show that the NLP analysis improves the LLM's corrections. Details are in `docs/evaluation_notes.md`.
 
 What cannot be measured objectively: POS tag accuracy on erroneous text (there are no gold tags), n-gram scores (they are only evidence), and the quality of the explanations.
 

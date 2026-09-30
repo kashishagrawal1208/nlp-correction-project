@@ -39,3 +39,23 @@ All numbers below describe THIS test set, not English in general.
   `to by` in "I want to by a knew car." (Brown is small).
 - LLM API failures met during development: 503 (server busy) and 429 (daily free
   quota); both were handled by the fallback.
+
+  ## LLM correction, `manual_tests/eval_llm.py`
+- Model: gemini-3.1-flash-lite, temperature 0.2, prompt `prompts/correction_prompt.txt`,
+  a single run over all 25 test sentences (run on 30 September 2026).
+- Exact match with the expected sentence: 25/25
+  (agreement 4/4, article 3/3, correct 4/4, multiple 3/3, real_word 3/3, spelling 5/5, tense 3/3).
+- Over-correction: 0 of 4 already-correct sentences were changed.
+- Model history: `gemini-3.7-flash` was used during development, but its free daily quota
+  (about 20 requests per day) was too small for the full test set, so the evaluation
+  was run with `gemini-3.1-flash-lite`. The model was chosen for its quota, before seeing any results,
+  and was not changed afterwards. The prompt was not changed during the evaluation.
+- Limits of this result: the test set is small (25 sentences), written by the author,
+  with the expected answers fixed by the author before the run; exact match is strict and
+  was not confirmed on unseen data; only one run was made, and LLM output can vary
+  between runs. We did NOT test the LLM without the NLP evidence, so this result does not
+  show that the NLP evidence improves the correction.
+- Network errors (DNS lookup failure) hit row 13 during the first run; the row was
+  completed in a second run and the other rows were read from the cache.
+- Row 24 was answered by an API call in two separate runs, although a cached answer was
+  expected the second time; the cause is unknown. The answer matched in both runs.
