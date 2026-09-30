@@ -59,3 +59,17 @@ All numbers below describe THIS test set, not English in general.
   completed in a second run and the other rows were read from the cache.
 - Row 24 was answered by an API call in two separate runs, although a cached answer was
   expected the second time; the cause is unknown. The answer matched in both runs.
+
+  ## Baseline: LLM without the NLP evidence, `manual_tests/eval_baseline.py`
+- Same model (gemini-3.1-flash-lite), temperature and test set as the main evaluation.
+  The prompt (`prompts/baseline_prompt.txt`) keeps the rules, output format and example
+  but removes the evidence sections and the instructions for using them.
+- Exact match: 25/25 (every category perfect); 0 of 4 correct sentences changed.
+- Conclusion: the hybrid system (25/25) and the baseline (25/25) cannot be distinguished
+  on this test set. The test set is too easy (a ceiling effect), so we make NO claim that the
+  NLP evidence improves the accuracy of the LLM's corrections.
+- Limits: 25 sentences written by the author, one run per condition, the baseline prompt
+  differs from the main prompt in more than the evidence (the instructions about the
+  evidence were removed too), and the same author wrote the expected answers.
+- A harder, larger and independently written test set would be needed for a real comparison.
+- One 503 error (server busy) on row 24 was retried and succeeded.

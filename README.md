@@ -178,7 +178,7 @@ For the second sentence the spell checker finds nothing (both words are in the d
 | Agreement rule, first version | 5 of 7 errors found |
 | Agreement rule after checking auxiliary verbs | 7 of 7 found, 0 false alarms. **The rule was changed after seeing these failures on the same test set, so this figure is optimistic** |
 
-**LLM correction** (`gemini-3.1-flash-lite`, temperature 0.2, single run): the corrected text matched the expected sentence exactly for **25 of 25** test sentences, and **0 of 4** already-correct sentences were changed. Caveats: the test set is small and easy, it was written by the author, only one run was made, and we did **not** compare against a run without the NLP evidence, so this does not show that the NLP analysis improves the LLM's corrections. Details are in `docs/evaluation_notes.md`.
+**LLM correction** (`gemini-3.1-flash-lite`, temperature 0.2, single run): the corrected text matched the expected sentence exactly for **25 of 25** test sentences, and **0 of 4** already-correct sentences were changed. **Baseline:** the same model with a prompt that has **no NLP evidence** (`prompts/baseline_prompt.txt`) also scored **25 of 25**, so this test set cannot show whether the NLP evidence improves the LLM's corrections. It is small, easy, written by the author, and each condition was run once. We therefore make no claim of an accuracy gain; the value of the hybrid design is the visible intermediate analysis, the fallback when the API fails, and the separately evaluated NLP components. Details are in `docs/evaluation_notes.md`.
 
 What cannot be measured objectively: POS tag accuracy on erroneous text (there are no gold tags), n-gram scores (they are only evidence), and the quality of the explanations.
 
@@ -196,6 +196,7 @@ What cannot be measured objectively: POS tag accuracy on erroneous text (there a
 ## Future improvements
 
 Interpolated or Kneser-Ney smoothing, a larger and more modern training corpus, a lexicon that includes modern words, an ablation study of the prompt, a larger and independently written test set, and tense and article checks based on the parse.
+a larger, harder and independently written test set, so that the hybrid system can be compared against the baseline.
 
 ## Project structure
 
@@ -203,6 +204,7 @@ Interpolated or Kneser-Ney smoothing, a larger and more modern training corpus, 
 app.py                       Streamlit interface
 config/config.yaml           settings
 prompts/correction_prompt.txt  the LLM prompt
+prompts/baseline_prompt.txt  the same prompt without NLP evidence (baseline experiment)
 src/
   config.py                  loads config.yaml once
   normalization.py           text cleaning
