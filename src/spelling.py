@@ -10,7 +10,7 @@ Method:
 
 from collections import Counter
 
-import yaml
+from src.config import load_config
 from nltk.corpus import brown
 from nltk.corpus import words as nltk_words
 
@@ -43,11 +43,7 @@ def load_resources():
 
 def get_max_edit_distance():
     """Read max_edit_distance from config/config.yaml (default 2)."""
-    try:
-        with open("config/config.yaml", "r", encoding="utf-8") as file:
-            return yaml.safe_load(file)["nlp"]["max_edit_distance"]
-    except (OSError, KeyError, TypeError):
-        return 2
+    return load_config().get("nlp", {}).get("max_edit_distance", 2)
 
 
 def edit_distance(a, b):

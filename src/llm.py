@@ -14,12 +14,12 @@ import os
 import re
 import time
 
-import yaml
+from src.config import load_config
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
 
-CONFIG_PATH = "config/config.yaml"
+
 REQUIRED_KEYS = {"corrected_text", "changes", "summary"}
 
 _client = None  # created once and reused
@@ -28,9 +28,8 @@ _client = None  # created once and reused
 # ---------- Configuration and prompt ----------
 
 def load_llm_config():
-    """Read the 'llm' section of config/config.yaml."""
-    with open(CONFIG_PATH, "r", encoding="utf-8") as file:
-        return yaml.safe_load(file)["llm"]
+       """Read the 'llm' section of config/config.yaml."""
+       return load_config()["llm"]
 
 
 def load_prompt_template(path):

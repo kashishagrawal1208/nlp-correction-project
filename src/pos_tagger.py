@@ -10,22 +10,18 @@ POS tagging = labelling each word with its grammatical category.
 
 import nltk
 import spacy
-import yaml
+from src.config import load_config
 
 _nlp = None  # the spaCy model, loaded once and reused
 
 
 def get_spacy_model():
-    """Load the spaCy English model the first time it is needed."""
-    global _nlp
-    if _nlp is None:
-        try:
-            with open("config/config.yaml", "r", encoding="utf-8") as file:
-                model_name = yaml.safe_load(file)["nlp"]["spacy_model"]
-        except (OSError, KeyError, TypeError):
-            model_name = "en_core_web_sm"
-        _nlp = spacy.load(model_name)
-    return _nlp
+       """Load the spaCy English model the first time it is needed."""
+       global _nlp
+       if _nlp is None:
+           model_name = load_config().get("nlp", {}).get("spacy_model", "en_core_web_sm")
+           _nlp = spacy.load(model_name)
+       return _nlp
 
 
 def tag_with_nltk(tokens):
