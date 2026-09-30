@@ -13,4 +13,5 @@ __pycache__/
 .vscode/
 .DS_Store
 Thumbs.db
-data/llm_cache.jsondata/llm_eval_output.csv
+data/llm_cache.json
+data/llm_eval_output.csv
