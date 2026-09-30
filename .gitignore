@@ -15,3 +15,4 @@ __pycache__/
 Thumbs.db
 data/llm_cache.json
 data/llm_eval_output.csv
+.pytest_cache/
