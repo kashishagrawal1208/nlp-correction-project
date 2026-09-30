@@ -50,6 +50,7 @@ def rank_errors_in_context(tokenized, errors):
 # ---------- Formatting: turn results into compact text for the LLM ----------
 
 def format_spelling(errors):
+    """Turn spelling errors and their context-ranked candidates into prompt text."""
     if not errors:
         return "No non-word spelling errors detected."
     lines = []
@@ -64,6 +65,7 @@ def format_spelling(errors):
 
 
 def format_pos(tagged_sentences):
+    """Turn POS tags into compact 'word/TAG' text for the prompt."""
     lines = []
     for number, tagged in enumerate(tagged_sentences, start=1):
         tags = " ".join(f"{t['word']}/{t['ptb']}" for t in tagged["spacy"])
@@ -72,6 +74,7 @@ def format_pos(tagged_sentences):
 
 
 def format_ngrams(ngram_reports):
+    """Turn per-sentence n-gram scores and unseen word pairs into prompt text."""
     lines = []
     for number, report in enumerate(ngram_reports, start=1):
         unseen = ", ".join(report["unseen_bigrams"]) or "none"
@@ -84,6 +87,7 @@ def format_ngrams(ngram_reports):
 
 
 def format_grammar(grammar_reports):
+    """Turn dependency links, verb structure and rule warnings into prompt text."""
     lines = []
     for number, report in enumerate(grammar_reports, start=1):
         deps = ", ".join(

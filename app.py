@@ -27,6 +27,7 @@ st.set_page_config(page_title="Hybrid NLP-LLM Correction", layout="wide")
 # ---------- Small helper: fill the text box from the example list ----------
 
 def use_example():
+    """Copy the chosen example sentence into the text box."""
     st.session_state.user_text = st.session_state.example_choice
 
 
