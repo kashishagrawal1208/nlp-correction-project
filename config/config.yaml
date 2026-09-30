@@ -1,16 +1,16 @@
-# Project configuration
+# Project configuration. Every setting below is read by the code.
 
 llm:
-  provider: gemini
+  # Model name. Google retires models over time (see scripts/check_llm_connection.py
+  # to list the models your API key can use).
   model: gemini-3.7-flash
+  # Low temperature = consistent, repeatable corrections.
   temperature: 0.2
+  # Extra attempts after a temporary API failure (503, per-minute limit).
   max_retries: 2
   prompt_file: prompts/correction_prompt.txt
 
 nlp:
   spacy_model: en_core_web_sm
-  ngram_corpus: brown
+  # Largest edit distance used when generating spelling candidates.
   max_edit_distance: 2
-
-paths:
-  test_data: data/test_sentences.csv
