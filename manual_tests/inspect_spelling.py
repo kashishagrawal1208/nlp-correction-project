@@ -1,7 +1,7 @@
 """
 inspect_spelling.py
 Phase 12: look closely at spelling results. Run from the project root:
-    python -m tests.inspect_spelling
+    python -m manual_tests.inspect_spelling
 Makes NO API calls.
 """
 

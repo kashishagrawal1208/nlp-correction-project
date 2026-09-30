@@ -1,7 +1,7 @@
 """
 eval_spelling.py
 Phase 12: evaluate spelling detection and candidate ranking on the test set.
-Run from the project root:  python -m tests.eval_spelling
+Run from the project root:  python -m manual_tests.eval_spelling
 Makes NO API calls.
 """
 

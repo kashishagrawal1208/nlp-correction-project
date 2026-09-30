@@ -1,7 +1,7 @@
 """
 eval_grammar.py
 Phase 12: evaluate the rule-based agreement check (parser.py).
-Run from the project root:  python -m tests.eval_grammar
+Run from the project root:  python -m manual_tests.eval_grammar
 Makes NO API calls.
 """
 

@@ -1,7 +1,7 @@
 """
 test_pos_tagger.py
 Manual test for Phase 6. Run from the PROJECT ROOT with:
-    python -m tests.test_pos_tagger
+    python -m manual_tests.test_pos_tagger
 """
 
 from src.normalization import normalize_text

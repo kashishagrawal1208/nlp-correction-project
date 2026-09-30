@@ -1,7 +1,7 @@
 """
 test_pipeline.py
 Manual test for Phase 9. Run from the PROJECT ROOT with:
-    python -m tests.test_pipeline
+    python -m manual_tests.test_pipeline
 The first run takes a while (loads Brown corpus and spaCy).
 """
 

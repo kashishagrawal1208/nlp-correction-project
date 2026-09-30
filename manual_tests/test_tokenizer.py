@@ -1,7 +1,7 @@
 """
 test_tokenizer.py
 Manual test for Phase 3. Run from the PROJECT ROOT with:
-    python -m tests.test_tokenizer
+    python -m manual_tests.test_tokenizer
 """
 
 from src.normalization import normalize_text, simple_sentence_split

@@ -1,7 +1,7 @@
 """
 inspect_grammar.py
 Phase 12: look at how spaCy parsed the two sentences our agreement check missed.
-Run from the project root:  python -m tests.inspect_grammar
+Run from the project root:  python -m manual_tests.inspect_grammar
 Makes NO API calls.
 """
 

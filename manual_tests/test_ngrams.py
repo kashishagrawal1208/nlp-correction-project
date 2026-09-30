@@ -1,7 +1,7 @@
 """
 test_ngrams.py
 Manual test for Phase 5. Run from the PROJECT ROOT with:
-    python -m tests.test_ngrams
+    python -m manual_tests.test_ngrams
 Training on Brown takes several seconds the first time.
 """
 

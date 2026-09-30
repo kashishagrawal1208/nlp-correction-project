@@ -1,7 +1,7 @@
 """
 test_llm.py
 Manual test for Phase 10. Run from the PROJECT ROOT with:
-    python -m tests.test_llm
+    python -m manual_tests.test_llm
 Tests 2-4 make real API calls (a few seconds each).
 """
 

@@ -1,7 +1,7 @@
 """
 test_parser.py
 Manual test for Phase 7. Run from the PROJECT ROOT with:
-    python -m tests.test_parser
+    python -m manual_tests.test_parser
 """
 
 from src.normalization import normalize_text

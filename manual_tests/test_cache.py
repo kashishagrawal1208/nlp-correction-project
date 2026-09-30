@@ -1,6 +1,6 @@
 """
 test_cache.py
-Run from the project root:  python -m tests.test_cache
+Run from the project root:  python -m manual_tests.test_cache
 Costs at most ONE API call. The second run of the same sentence must be cached.
 """
 

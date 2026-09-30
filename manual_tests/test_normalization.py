@@ -1,7 +1,7 @@
 """
 test_normalization.py
 Quick manual test for Phase 2. Run from the PROJECT ROOT folder with:
-    python -m tests.test_normalization
+    python -m manual_tests.test_normalization
 """
 
 from src.normalization import normalize_text, simple_sentence_split

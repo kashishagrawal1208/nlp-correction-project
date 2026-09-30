@@ -1,7 +1,7 @@
 """
 test_spelling.py
 Manual test for Phase 4. Run from the PROJECT ROOT with:
-    python -m tests.test_spelling
+    python -m manual_tests.test_spelling
 The first run takes a few seconds (building the lexicon).
 """
 

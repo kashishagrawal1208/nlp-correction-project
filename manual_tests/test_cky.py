@@ -1,7 +1,7 @@
 """
 test_cky.py
 Manual test for Phase 8. Run from the PROJECT ROOT with:
-    python -m tests.test_cky
+    python -m manual_tests.test_cky
 """
 
 from src.cky import parse_sentence, show_chart, tree_to_brackets, tree_to_lines

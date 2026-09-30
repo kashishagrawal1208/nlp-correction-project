@@ -1,7 +1,7 @@
 """
 eval_llm.py
 Phase 12: evaluate the LLM correction on data/test_sentences.csv.
-Run from the project root:  python -m tests.eval_llm
+Run from the project root:  python -m manual_tests.eval_llm
 Uses the API (cached answers are free). Safe to run again: finished rows come
 from the cache, and the script stops cleanly when the daily quota is used up.
 """
